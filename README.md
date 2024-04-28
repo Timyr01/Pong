@@ -1,7 +1,7 @@
 from pygame import*
 
-img_ball = 'png-clipart-green-tennis-ball-tennis-balls-racket-simple-tennis-ball-miscellaneous-sport.png'
-# img_racket = ''
+img_ball = 'ball.png'
+img_racket = 'racket.jpg'
 
 class GameSprite(sprite.Sprite): 
     def __init__(self, player_image, player_x, player_y, player_speed, wight, height):
@@ -57,6 +57,16 @@ while game:
         if ball.rect.y > win_height - 50 or ball.rect.y < 0:
             speed_y *= -1
 
+        if ball.rect.x < 0:
+            finish = True
+            window.blit(lose1, (200,200))
+            game_over = True
+        
+        if ball.rect.x > win.width:
+            finish = True
+            window.blit(lose2, (200,200))
+            game_over = True
+
 
 window = display.set_mode((500,500)) 
 col1 = (0, 0, 255)
@@ -73,5 +83,6 @@ while run:
 
 
 
-ball.update()
-ball.draw(window)
+racket1.reset()
+racket2.reset()
+ball.reset()
